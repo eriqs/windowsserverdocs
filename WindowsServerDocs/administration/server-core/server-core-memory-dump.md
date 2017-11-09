@@ -79,12 +79,15 @@ To change the current memory dump type, run the following command:
 wmic RECOVEROS set DebugInfoType = <Value>
 ```
 
-\<Value\> can be 0, 1, 2, or 3, as defined below.
+\<Value\> can be 0, 1, 2, 3, or 7 as defined below.
 
-- 0: Disable the removal of a memory dump.
+- 0: Disable the creation of a memory dump.
 - 1: Full memory dump. Records all of the contents of system memory when your computer stops unexpectedly. A full memory dump may contain data from processes that were running when the memory dump was collected.
-- 2: Kernel memory dump (default). Records only the kernel memory. This speeds up the process of recording information in a log file when your computer stops unexpectedly.
+- 2: Kernel memory dump. Records only the kernel memory. This speeds up the process of recording information in a log file when your computer stops unexpectedly.
 - 3: Small memory dump. Records the smallest set of useful information that may help identify why your computer stopped unexpectedly.
+- 7: Automatic memory dump (default). The Automatic memory dump option produces a Kernel memory dump, the difference is when you select Automatic it allows the SMSS process to reduce the page file smaller than the size of RAM.
+
+   >[!NOTE]    > Windows Server 2016 introduces a dump type of “Active memory dump”, which filters out most memory pages allocated to VMs and therefore makes the memory.dmp much smaller and easier to save/copy. When this option is selected, the DebugInfoType has a value of 1.
 
 ## Step 4: Configure the server to restart automatically after generating a memory dump
 
@@ -192,5 +195,7 @@ For general information about using memory dump files, see [Overview of memory d
 
 For more information about dedicated dump files, see [How to use the DedicatedDeumpFile registry value to overcome space limitations on the system drive while capturing a system memory dump](https://blogs.msdn.microsoft.com/ntdebugging/2010/04/02/how-to-use-the-dedicateddumpfile-registry-value-to-overcome-space-limitations-on-the-system-drive-when-capturing-a-system-memory-dump/).
 
+For more information about the Automatic Memory Dump option, see [Windows 8 and Windows Server 2012: Automatic Memory Dump](http://aka.ms/AutomaticDump)
 
+For more information about the Active Memory Dump option, see [Windows Server 2016 Failover Cluster Troubleshooting Enhancements – Active Dump](http://aka.ms/ActiveDump)
 
